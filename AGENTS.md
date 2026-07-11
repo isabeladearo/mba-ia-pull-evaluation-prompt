@@ -84,7 +84,7 @@ Avaliação:
 |----------|-------------|---------|-----------|
 | `LANGSMITH_API_KEY` | Sim | — | Chave do LangSmith |
 | `USERNAME_LANGSMITH_HUB` | Sim (push/eval) | — | Handle público no Hub |
-| `LANGSMITH_PROJECT` | Não | `mba-ia-pull-evaluation-prompt` | Projeto de tracing |
+| `LANGSMITH_PROJECT` | Não | (nome no `.env`) | Projeto de tracing — use um nome **seu** no `.env` |
 | `OPENAI_API_KEY` | Sim (se openai) | — | Chave OpenAI |
 | `LLM_PROVIDER` | Não | `openai` | `openai` ou `google` |
 | `LLM_MODEL` | Não | `gpt-4o-mini` | Modelo de geração |
@@ -119,7 +119,7 @@ Todas devem ser ≥ 0.8 (não basta a média):
 | Helpfulness | `(Clarity + Precision) / 2` |
 | Correctness | `(F1 + Precision) / 2` |
 
-Última execução aprovada: Helpfulness 0.90, Correctness 0.86, F1 0.85, Clarity 0.93, Precision 0.87.
+Última execução de referência (exemplo aprovado): Helpfulness 0.90, Correctness 0.86, F1 0.85, Clarity 0.93, Precision 0.87 — **com credenciais próprias**, não compartilhadas.
 
 ---
 
@@ -159,7 +159,8 @@ O desafio prevê **3-5 iterações**. Fluxo:
 
 ## O que NÃO fazer
 
-- Não commitar `.env` com chaves reais
+- Não commitar `.env` com chaves reais ou handle pessoal
+- Não documentar credenciais, URLs ou handles de terceiros no README — use placeholders (`{seu_username}`, `{LANGSMITH_PROJECT}`)
 - Não alterar `src/evaluate.py`, `src/metrics.py`, `src/utils.py` (fornecidos pelo desafio)
 - Não alterar `datasets/bug_to_user_story.jsonl`
 - Não usar venv de outro projeto (ex.: `langchain/.venv`)

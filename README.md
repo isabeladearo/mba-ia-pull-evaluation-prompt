@@ -2,9 +2,7 @@
 
 Desafio do MBA IA — Full Cycle: transformar prompts de baixa qualidade em prompts production-ready, versionados no LangSmith Hub e validados por métricas objetivas.
 
-**Autora:** Isabela de Aro  
-**Prompt publicado:** [isabeladearo/bug_to_user_story_v2](https://smith.langchain.com/prompts/bug_to_user_story_v2)  
-**Dashboard LangSmith:** [mba-ia-pull-evaluation-prompt](https://smith.langchain.com/projects/mba-ia-pull-evaluation-prompt)
+> **Configure suas próprias credenciais** no `.env` antes de executar. Os exemplos abaixo usam placeholders como `{seu_username}` — substitua pelos seus acessos (LangSmith Hub, OpenAI/Gemini e GitHub).
 
 ---
 
@@ -51,7 +49,7 @@ bug_to_user_story_v1  ──────────────────► 
                                                       │
                               push_prompts.py         │
                               evaluate.py             ▼
-                                             isabeladearo/
+                                             {seu_username}/
                                              bug_to_user_story_v2
                                                       │
                                                       ▼
@@ -128,13 +126,13 @@ Além disso, regras explícitas de **escolha de persona** por tipo de bug (clien
 
 ## Resultados Finais
 
-### Métricas — v2 aprovado
+### Métricas — v2 aprovado (exemplo)
 
-Execução final de `python src/evaluate.py` (11/07/2026):
+Após configurar seu `.env` e publicar o prompt, uma execução bem-sucedida de `python src/evaluate.py` deve retornar algo como:
 
 ```
 ==================================================
-Prompt: isabeladearo/bug_to_user_story_v2
+Prompt: {seu_username}/bug_to_user_story_v2
 ==================================================
 
 Métricas Derivadas:
@@ -153,8 +151,8 @@ Métricas Base:
 
 ### Tabela comparativa — v1 vs v2
 
-| Métrica | v1 (leonanluppi) | v2 (isabeladearo) | Δ |
-|---------|------------------|-------------------|---|
+| Métrica | v1 (leonanluppi) | v2 (otimizado) | Δ |
+|---------|------------------|----------------|-----|
 | Helpfulness | 0.45 ✗ | **0.90** ✓ | +0.45 |
 | Correctness | 0.52 ✗ | **0.86** ✓ | +0.34 |
 | F1-Score | 0.48 ✗ | **0.85** ✓ | +0.37 |
@@ -162,7 +160,7 @@ Métricas Base:
 | Precision | 0.46 ✗ | **0.87** ✓ | +0.41 |
 | **Média** | **0.48** | **0.88** | **+0.40** |
 
-> Valores v1 são ilustrativos do desafio (prompt de referência do instrutor). Valores v2 são da execução real deste repositório.
+> Valores v1 são ilustrativos do desafio (prompt do instrutor). Valores v2 são **exemplo** de execução aprovada — os seus podem variar conforme iterações e provider configurado.
 
 ### Iterações realizadas
 
@@ -174,11 +172,13 @@ Métricas Base:
 
 ### Evidências no LangSmith
 
-- **Projeto:** https://smith.langchain.com/projects/mba-ia-pull-evaluation-prompt
-- **Prompt v2:** https://smith.langchain.com/prompts/bug_to_user_story_v2
-- **Dataset:** `mba-ia-pull-evaluation-prompt-eval` (15 exemplos)
+Após executar o projeto com **suas credenciais**, registre no README da sua entrega:
 
-> **Screenshots:** adicione capturas do dashboard em `screenshots/` (pasta ignorada pelo git) e referencie aqui se desejar versionar as imagens.
+- **Projeto:** `https://smith.langchain.com/projects/{LANGSMITH_PROJECT}`
+- **Prompt v2:** `https://smith.langchain.com/prompts/{seu_username}/bug_to_user_story_v2`
+- **Dataset:** `{LANGSMITH_PROJECT}-eval` (15 exemplos — criado automaticamente pelo `evaluate.py`)
+
+> **Screenshots:** adicione capturas do **seu** dashboard em `screenshots/` e referencie aqui na entrega.
 
 ---
 
@@ -192,8 +192,10 @@ Métricas Base:
 
 ### 1. Clonar e configurar ambiente
 
+Faça fork do [repositório base](https://github.com/devfullcycle/mba-ia-pull-evaluation-prompt) e clone **sua cópia**:
+
 ```bash
-git clone git@github.com:isabeladearo/mba-ia-pull-evaluation-prompt.git
+git clone git@github.com:SEU_USUARIO_GITHUB/mba-ia-pull-evaluation-prompt.git
 cd mba-ia-pull-evaluation-prompt
 
 python3 -m venv venv
@@ -207,13 +209,14 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-Edite `.env` com suas credenciais:
+Edite `.env` com **suas** credenciais (nunca commite este arquivo):
 
 | Variável | Descrição |
 |----------|-----------|
-| `LANGSMITH_API_KEY` | Chave em https://smith.langchain.com/settings |
-| `USERNAME_LANGSMITH_HUB` | Seu handle do Hub (ex: `isabeladearo`) |
-| `OPENAI_API_KEY` | Chave da OpenAI |
+| `LANGSMITH_API_KEY` | Sua chave em https://smith.langchain.com/settings |
+| `USERNAME_LANGSMITH_HUB` | Seu handle do Hub (crie em https://smith.langchain.com/prompts) |
+| `LANGSMITH_PROJECT` | Nome do seu projeto no LangSmith (ex: `meu-projeto-prompts`) |
+| `OPENAI_API_KEY` | Sua chave da OpenAI |
 | `LLM_PROVIDER` | `openai` (padrão) ou `google` |
 | `LLM_MODEL` | `gpt-4o-mini` (geração) |
 | `EVAL_MODEL` | `gpt-4o` (avaliação) |
